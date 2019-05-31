@@ -8,6 +8,7 @@ var chai = require('chai'),
   wrapAsync = require('xolvio-sync-webdriverio').wrapAsync,
   wrapAsyncObject = require('xolvio-sync-webdriverio').wrapAsyncObject,
   SessionFactory = require('./session-factory'),
+  widgets = require('chimp-widgets'),
   path = require('path'),
   colors = require('colors'),
   fs = require('fs-extra'),
@@ -63,6 +64,12 @@ var chimpHelper = {
         }
       }
     }
+  },
+
+  configureWidgets: function () {
+    // CHIMP WIDGETS
+    widgets.driver.api = global.browser;
+    global.chimpWidgets = widgets;
   },
 
   createGlobalAliases: function () {
@@ -258,12 +265,17 @@ var chimpHelper = {
       }
     };
 
+    var configureChimpWidgetsDriver = function () {
+      widgets.driver.api = global.browser;
+    };
+
     try {
       setupBrowser();
       initBrowser();
       if (booleanHelper.isTruthy(process.env['chimp.ddp0'])) {
         setupDdp();
       }
+      configureChimpWidgetsDriver();
     } catch (error) {
       log.error('[chimp][helper] setupBrowserAndDDP had error');
       log.error(error);
@@ -273,6 +285,7 @@ var chimpHelper = {
   },
 
   init: function () {
+    this.configureWidgets();
     this.setupGlobals();
     this.createGlobalAliases();
   }
