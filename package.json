@@ -83,7 +83,7 @@
     "child-process-debug": "0.0.7",
     "chimp-widgets": "github:boda2004/chimp-widgets",
     "chokidar": "^2.1.6",
-    "chromedriver": "^2.46.0",
+    "chromedriver": "^74.0.0",
     "colors": "1.1.2",
     "commander": "^2.20.0",
     "cucumber": "github:boda2004/cucumber-js#node-12",
